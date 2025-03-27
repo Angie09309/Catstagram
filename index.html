@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Catstagram</title>
+  </head>
+  <body>
+    <h1>Catstagram</h1>
+    <label for="breed_selector">Selecciona una raza:</label>
+    <select id="breed_selector">
+      <option value="">Cats</option>
+    </select>
+
+    <div id="breed-info-container">
+      <div>
+        <a id="wiki_link" target="_blank"></a>
+        <div id="breed_json"></div>
+      </div>
+
+      <div>
+        <img id="breed_image" />
+      </div>
+    </div>
+
+    <div id="cats-container"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
