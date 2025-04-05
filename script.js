@@ -37,6 +37,8 @@ async function getBreeds() {
 
 async function getData(breedId = "") {
   try {
+    document.getElementById("loader").style.display = "block";
+
     catContainer.innerHTML = "";
     breedImage.src = "";
     breedInfo.textContent = "";
@@ -63,6 +65,7 @@ async function getData(breedId = "") {
       imgElement.alt = "Imagen de un gato";
       imgElement.style.width = "200px";
       imgElement.style.margin = "10px";
+      imgElement.style.objectFit = "cover";
       catContainer.appendChild(imgElement);
     });
 
@@ -82,6 +85,8 @@ async function getData(breedId = "") {
     }
   } catch (error) {
     console.error(error.message);
+  } finally {
+    document.getElementById("loader").style.display = "none";
   }
 }
 
