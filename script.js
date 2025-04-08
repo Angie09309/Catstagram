@@ -35,16 +35,19 @@ async function getBreeds() {
   }
 }
 
+function clearDisplay() {
+  catContainer.innerHTML = "";
+  breedImage.src = "";
+  breedInfo.textContent = "";
+  wikiLink.textContent = "";
+  document.getElementById("breed-info-container").style.display = "none";
+}
+
 async function getData(breedId = "") {
   try {
     document.getElementById("loader").style.display = "block";
 
-    catContainer.innerHTML = "";
-    breedImage.src = "";
-    breedInfo.textContent = "";
-    wikiLink.textContent = "";
-
-    document.getElementById("breed-info-container").style.display = "none";
+    clearDisplay();
 
     let url = `https://api.thecatapi.com/v1/images/search?limit=10&order=RANDOM&page=0&api_key=${apiKey}`;
 
@@ -60,13 +63,33 @@ async function getData(breedId = "") {
 
     const imagenes = await respuesta.json();
     imagenes.forEach((imagen) => {
+      const card = document.createElement("div");
+      card.classList.add("cat-card");
+
       let imgElement = document.createElement("img");
       imgElement.src = imagen.url;
       imgElement.alt = "Imagen de un gato";
-      imgElement.style.width = "200px";
-      imgElement.style.margin = "10px";
-      imgElement.style.objectFit = "cover";
-      catContainer.appendChild(imgElement);
+      imgElement.classList.add("cat-img");
+
+      const heartIcon = document.createElement("img");
+      heartIcon.src = "icono/hug.png";
+      heartIcon.alt = "Like";
+      heartIcon.classList.add("heart-icon");
+      heartIcon.style.display = "block";
+
+      imgElement.addEventListener("click", () => {
+        heartIcon.style.display = "block";
+        heartIcon.classList.add("show");
+
+        setTimeout(() => {
+          heartIcon.style.display = "none";
+          heartIcon.classList.remove("show");
+        }, 1000);
+      });
+
+      card.appendChild(imgElement);
+      card.appendChild(heartIcon);
+      catContainer.appendChild(card);
     });
 
     if (breedId) {
