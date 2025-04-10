@@ -29,10 +29,12 @@ select {
 
 #cats-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  gap: 25px;
   margin-top: 20px;
+  padding: 20px;
 }
 
 #breed-info-container {
@@ -100,16 +102,18 @@ select {
 
 .cat-card {
   position: relative;
-  width: 200px;
-  height: 200px;
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
 }
 
 .cat-card img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 450px;
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
 }
@@ -120,17 +124,34 @@ select {
 
 .heart-icon {
   position: absolute;
-  top: 0px;
-  right: 2px;
-
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 150px;
+  transform: translate(-50%, -50%);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  border: none;
+  z-index: 5;
 }
 
 .heart-icon.show {
   opacity: 1;
-  animation: pop 0.5s ease;
+}
+
+.cat-like-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 10;
+  color: #f15bb5;
+  transition: transform 0.2s ease;
+}
+
+.cat-like-button:hover {
+  transform: scale(1.2);
 }
 
 @keyframes pop {
@@ -145,5 +166,17 @@ select {
   100% {
     transform: scale(1);
     opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .cat-card {
+    width: 100%;
+    aspect-ratio: auto;
+  }
+
+  .cat-card img {
+    width: 100%;
+    height: auto;
   }
 }

@@ -75,14 +75,23 @@ async function getData(breedId = "") {
       heartIcon.src = "icono/hug.png";
       heartIcon.alt = "Like";
       heartIcon.classList.add("heart-icon");
-      heartIcon.style.display = "block";
+
+      const likeButton = document.createElement("i");
+      likeButton.className = "fi fi-tr-cat-head cat-like-button";
+      card.appendChild(likeButton);
 
       imgElement.addEventListener("click", () => {
-        heartIcon.style.display = "block";
         heartIcon.classList.add("show");
 
         setTimeout(() => {
-          heartIcon.style.display = "none";
+          heartIcon.classList.remove("show");
+        }, 1000);
+      });
+
+      likeButton.addEventListener("click", () => {
+        heartIcon.classList.add("show");
+
+        setTimeout(() => {
           heartIcon.classList.remove("show");
         }, 1000);
       });
