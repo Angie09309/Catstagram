@@ -77,26 +77,27 @@ async function getData(breedId = "") {
       heartIcon.classList.add("heart-icon");
 
       const likeButton = document.createElement("i");
-      likeButton.className = "fi fi-tr-cat-head cat-like-button";
-      card.appendChild(likeButton);
+      likeButton.className = "fi fi-ts-cat-head cat-like-button";
+     
 
       imgElement.addEventListener("click", () => {
-        heartIcon.classList.add("show");
+        heartIcon.classList.add("show", "bounce");
 
         setTimeout(() => {
-          heartIcon.classList.remove("show");
-        }, 1000);
+          heartIcon.classList.remove("show", "bounce");
+        }, 900);
       });
 
       likeButton.addEventListener("click", () => {
-        heartIcon.classList.add("show");
+        heartIcon.classList.add("show", "bounce");
 
         setTimeout(() => {
-          heartIcon.classList.remove("show");
-        }, 1000);
+          heartIcon.classList.remove("show", "bounce");
+        }, 900);
       });
 
       card.appendChild(imgElement);
+      card.appendChild(likeButton);
       card.appendChild(heartIcon);
       catContainer.appendChild(card);
     });
