@@ -78,10 +78,26 @@ async function getData(breedId = "") {
 
       const likeButton = document.createElement("i");
       likeButton.className = "fi fi-ts-cat-head cat-like-button";
-     
+
+      const commentButton = document.createElement("i");
+      commentButton.className = "fi fi-ts-comment-heart cat-action-button";
+
+      const shareButton = document.createElement("i");
+      shareButton.className = "fi fi-tr-source-document cat-action-button";
 
       imgElement.addEventListener("click", () => {
-        heartIcon.classList.add("show", "bounce");
+        const isLiked = likeButton.classList.toggle("liked");
+
+        if (isLiked) {
+          likeCount++;
+          heartIcon.classList.add("show", "bounce");
+        } else {
+          likeCount--;
+        }
+
+        likeText.textContent = `${likeCount} ${
+          likeCount === 1 ? "like" : "likes"
+        }`;
 
         setTimeout(() => {
           heartIcon.classList.remove("show", "bounce");
@@ -89,7 +105,18 @@ async function getData(breedId = "") {
       });
 
       likeButton.addEventListener("click", () => {
-        heartIcon.classList.add("show", "bounce");
+        const isLiked = likeButton.classList.toggle("liked");
+
+        if (isLiked) {
+          likeCount++;
+          heartIcon.classList.add("show", "bounce");
+        } else {
+          likeCount--;
+        }
+
+        likeText.textContent = `${likeCount} ${
+          likeCount === 1 ? "like" : "likes"
+        }`;
 
         setTimeout(() => {
           heartIcon.classList.remove("show", "bounce");
@@ -97,7 +124,20 @@ async function getData(breedId = "") {
       });
 
       card.appendChild(imgElement);
-      card.appendChild(likeButton);
+      const actionContainer = document.createElement("div");
+      actionContainer.className = "cat-actions";
+
+      actionContainer.appendChild(likeButton);
+      actionContainer.appendChild(commentButton);
+      actionContainer.appendChild(shareButton);
+      card.appendChild(actionContainer);
+
+      let likeCount = 0;
+      const likeText = document.createElement("p");
+      likeText.classList.add("like-count");
+      likeText.textContent = `${likeCount} likes`;
+
+      card.appendChild(likeText);
       card.appendChild(heartIcon);
       catContainer.appendChild(card);
     });
